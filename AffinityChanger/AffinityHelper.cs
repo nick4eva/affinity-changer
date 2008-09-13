@@ -1,14 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿//-----------------------------------------------------------------------------
+// <copyright file="AffinityHelper.cs" company="nick4eva's software">
+//     Copyright (c) nick4eva's software. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------------
 
 namespace AffinityChanger
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
+    /// <summary>
+    /// Вспомогательный класс
+    /// </summary>
     static class AffinityHelper
     {
         #region Поля
 
-        static int cpuCount = Environment.ProcessorCount;
+        /// <summary>
+        /// Количество процессоров
+        /// </summary>
+        private static int cpuCount = Environment.ProcessorCount;
 
         #endregion
 
@@ -35,17 +47,17 @@ namespace AffinityChanger
         /// <summary>
         /// Установка маски соответствия процессоров для процесса
         /// </summary>
-        /// <param name="process"></param>
-        /// <param name="cpuNumber"></param>
+        /// <param name="process">процесс</param>
+        /// <param name="cpuNumber">процессор</param>
         public static void SetAffinity(Process process, int cpuNumber)
         {
-            IntPtr AffinityMask;
+            IntPtr affinityMask;
 
             // если маска соответствия процессоров для текущего процесса не соответствует текущему процессу
-            if (process.ProcessorAffinity != (AffinityMask = (IntPtr)(Math.Pow(2, cpuNumber))))
+            if (process.ProcessorAffinity != (affinityMask = (IntPtr)(Math.Pow(2, cpuNumber))))
             {
                 // выставляем соответствующую маску соответствия процессоров для текущего процесса
-                process.ProcessorAffinity = AffinityMask;
+                process.ProcessorAffinity = affinityMask;
             }
         }
         #endregion
@@ -54,7 +66,7 @@ namespace AffinityChanger
         /// <summary>
         /// Получение маски привязки процессов по-умолчанию
         /// </summary>
-        /// <returns></returns>
+        /// <returns>маска привязки</returns>
         public static IntPtr GetDefaultAffinity()
         {
             int bitmask = 0;
@@ -72,8 +84,8 @@ namespace AffinityChanger
         /// <summary>
         /// Нахождение минимального числа в списке
         /// </summary>
-        /// <param name="list"></param>
-        /// <returns></returns>
+        /// <param name="list">список чисед</param>
+        /// <returns>минимальное число</returns>
         public static int Min(List<int> list)
         {
             int value = 0;
@@ -82,7 +94,10 @@ namespace AffinityChanger
             {
                 if (hasValue)
                 {
-                    if (x < value) value = x;
+                    if (x < value)
+                    {
+                        value = x;
+                    }
                 }
                 else
                 {
@@ -91,7 +106,11 @@ namespace AffinityChanger
                 }
             }
 
-            if (hasValue) return value;
+            if (hasValue)
+            {
+                return value;
+            }
+
             throw new NotSupportedException();
         } 
         #endregion

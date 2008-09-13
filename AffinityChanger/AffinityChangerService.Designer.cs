@@ -2,10 +2,12 @@
 {
     partial class AffinityChangerService
     {
+        private System.Timers.Timer timer;
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer components;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -13,9 +15,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -33,14 +35,12 @@
             // timer
             //
             this.timer.Enabled = true;
-            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer_Elapsed);
+            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.TimerElapsed);
             // 
             // AffinityChanger
             // 
             this.ServiceName = "AffinityChanger";
         }
         #endregion
-
-        private System.Timers.Timer timer;
     }
 }

@@ -1,16 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.ServiceProcess;
-using Microsoft.Win32;
-
+﻿//-----------------------------------------------------------------------------
+// <copyright file="AffinityChangerService.cs" company="nick4eva's software">
+//     Copyright (c) nick4eva's software. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------------
+[assembly: System.CLSCompliant(true)]
 namespace AffinityChanger
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.ServiceProcess;
+    using Microsoft.Win32;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
+
     public partial class AffinityChangerService : ServiceBase
     {
-        string configFile;
-        string processPriority;
+        /// <summary>
+        /// Путь к конфигурационному файлу
+        /// </summary>
+        private string configFilePath;
+
+        /// <summary>
+        /// Приоритет процесса
+        /// </summary>
+        private string processPriority;
 
         #region Конструктор
         /// <summary>
@@ -26,7 +42,7 @@ namespace AffinityChanger
         /// <summary>
         /// Установка интервала таймера
         /// </summary>
-        void SetTimerInterval()
+        private void SetTimerInterval()
         {
             double defaultValue = 300000;
             string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
@@ -55,7 +71,7 @@ namespace AffinityChanger
         /// <summary>
         /// Установка конфигурационного файла
         /// </summary>
-        void SetConfigFile()
+        private void SetConfigFile()
         {
             string defaultValue = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
             string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
@@ -69,13 +85,13 @@ namespace AffinityChanger
             }
 
             // если стоит пустое значение или нет параметра
-            if ((string)Registry.GetValue(keyName, valueName, "") == "")
+            if (string.IsNullOrEmpty((string)Registry.GetValue(keyName, valueName, string.Empty)))
             {
                 // ставим параметр по умолчанию
                 Registry.SetValue(keyName, valueName, defaultValue, RegistryValueKind.String);
             }
 
-            configFile = (string)Registry.GetValue(keyName, valueName, defaultValue);
+            this.configFilePath = (string)Registry.GetValue(keyName, valueName, defaultValue);
         } 
         #endregion
 
@@ -83,7 +99,7 @@ namespace AffinityChanger
         /// <summary>
         /// Установка приоритета процесса
         /// </summary>
-        void SetProcessPriority()
+        private void SetProcessPriority()
         {
             string defaultValue = @"normal";
             string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
@@ -97,13 +113,14 @@ namespace AffinityChanger
             }
 
             // если стоит нулевое значение или нет параметра
-            if ((string)Registry.GetValue(keyName, valueName, "") == "")
+            //if ((string)Registry.GetValue(keyName, valueName, string.Empty) == string.Empty)
+            if (string.IsNullOrEmpty((string)Registry.GetValue(keyName, valueName, string.Empty)))
             {
                 // ставим параметр по умолчанию
                 Registry.SetValue(keyName, valueName, defaultValue, RegistryValueKind.String);
             }
 
-            processPriority = (string)Registry.GetValue(keyName, valueName, defaultValue);
+            this.processPriority = (string)Registry.GetValue(keyName, valueName, defaultValue);
         } 
         #endregion
 
@@ -111,14 +128,14 @@ namespace AffinityChanger
         /// <summary>
         /// Запуск сервиса
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">параметры запуска сервиса</param>
         protected override void OnStart(string[] args)
         {           
             // устанавливаем интервал таймера
-            SetTimerInterval();
+            this.SetTimerInterval();
 
             // устанавливаем путь к конфигурационному файлу
-            SetConfigFile();
+            this.SetConfigFile();
 
             // запускаем таймер
             timer.Start();
@@ -142,25 +159,25 @@ namespace AffinityChanger
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             // устанавливаем интервал таймера
-            SetTimerInterval();
+            this.SetTimerInterval();
 
             // устанавливаем конфигурационный файл
-            SetConfigFile();
+            this.SetConfigFile();
 
             // устанавливаем приоритет для процессов
-            SetProcessPriority();
+            this.SetProcessPriority();
 
-            if (!File.Exists(configFile))
+            if (!File.Exists(this.configFilePath))
             {
                 return;
             }
 
             string configLine;
             List<string> configItems = new List<string>();
-            using (StreamReader reader = new StreamReader(configFile))
+            using (StreamReader reader = new StreamReader(this.configFilePath))
             {
                 while ((configLine = reader.ReadLine()) != null)
                 {
@@ -173,35 +190,57 @@ namespace AffinityChanger
                 return;
             }
 
-            //List<Process> processList = Process.GetProcesses().ToList<Process>();
             Process[] prosesses = Process.GetProcesses();
             List<Process> processList = new List<Process>();
             foreach (Process process in prosesses)
             {
                 processList.Add(process);
             }
+
             List<Process> processNameList = new List<Process>();
             List<int> cpuCoresClients = new List<int>();
 
+            //foreach (string item in configItems)
+            //{
+            //    processNameList = processList.FindAll(x => Regex.IsMatch(x.ProcessName, item));
+
+            //    foreach (Process process in processNameList)
+            //    {
+            //        // если у процесса выставлена маска по-умолчанию (на все ядра)
+            //        if (process.ProcessorAffinity == AffinityHelper.GetDefaultAffinity())
+            //        {
+            //            cpuCoresClients.Clear();
+
+            //            for (int i = 0; i < AffinityHelper.CpuCount; i++)
+            //            {
+            //                cpuCoresClients.Add(processNameList.FindAll(x => x.ProcessorAffinity == (IntPtr)Math.Pow(2, i)).Count);
+            //            }
+
+            //            AffinityHelper.SetAffinity(process, cpuCoresClients.IndexOf(AffinityHelper.Min(cpuCoresClients)));
+            //            process.PriorityClass = (ProcessPriorityClass)System.Enum.Parse(typeof(ProcessPriorityClass), this.processPriority, true);
+            //        }
+            //    }
+            //}
+
             foreach (string item in configItems)
             {
-                processNameList = processList.FindAll(x => x.ProcessName.Contains(item));
+                processNameList.AddRange(processList.FindAll(x => Regex.IsMatch(x.ProcessName, item)));
+            }
 
-                foreach (Process process in processNameList)
+            foreach (Process process in processNameList)
+            {
+                // если у процесса выставлена маска по-умолчанию (на все ядра)
+                if (process.ProcessorAffinity == AffinityHelper.GetDefaultAffinity())
                 {
-                    // если у процесса выставлена маска по-умолчанию (на все ядра)
-                    if (process.ProcessorAffinity == AffinityHelper.GetDefaultAffinity())
+                    cpuCoresClients.Clear();
+
+                    for (int i = 0; i < AffinityHelper.CpuCount; i++)
                     {
-                        cpuCoresClients.Clear();
-
-                        for (int i = 0; i < AffinityHelper.CpuCount; i++)
-                        {
-                            cpuCoresClients.Add(processNameList.FindAll(x => x.ProcessorAffinity == (IntPtr)Math.Pow(2, i)).Count);
-                        }
-
-                        AffinityHelper.SetAffinity(process, cpuCoresClients.IndexOf(AffinityHelper.Min(cpuCoresClients)));
-                        process.PriorityClass = (ProcessPriorityClass)System.Enum.Parse(typeof(ProcessPriorityClass), processPriority, true);
+                        cpuCoresClients.Add(processNameList.FindAll(x => x.ProcessorAffinity == (IntPtr)Math.Pow(2, i)).Count);
                     }
+
+                    AffinityHelper.SetAffinity(process, cpuCoresClients.IndexOf(AffinityHelper.Min(cpuCoresClients)));
+                    process.PriorityClass = (ProcessPriorityClass)System.Enum.Parse(typeof(ProcessPriorityClass), this.processPriority, true);
                 }
             }
         }
