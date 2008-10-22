@@ -14,6 +14,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AffinityChangerSetup", "Aff
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AffinityChangerSetup_x64", "AffinityChangerSetup_x64\AffinityChangerSetup_x64.vdproj", "{519C341F-7EAD-4CBE-904F-4F5EC6ECC9D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffinityChanger.Tests", "AffinityChanger.Tests\AffinityChanger.Tests.csproj", "{B3983205-AF70-4759-8B8D-7F5F86ADCA50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{519C341F-7EAD-4CBE-904F-4F5EC6ECC9D8}.Release|Any CPU.ActiveCfg = Release
 		{519C341F-7EAD-4CBE-904F-4F5EC6ECC9D8}.Release|x64.ActiveCfg = Release
 		{519C341F-7EAD-4CBE-904F-4F5EC6ECC9D8}.Release|x64.Build.0 = Release
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3983205-AF70-4759-8B8D-7F5F86ADCA50}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
