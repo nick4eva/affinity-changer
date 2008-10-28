@@ -4,7 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{C3D563E1-D756-4943-A1B0-0862E5730A41}"
 	ProjectSection(SolutionItems) = preProject
 		AffinityChanger\ChangeLog.txt = AffinityChanger\ChangeLog.txt
-		AffinityChanger\config.txt = AffinityChanger\config.txt
 		AffinityChanger\TODO.txt = AffinityChanger\TODO.txt
 	EndProjectSection
 EndProject
@@ -22,7 +21,7 @@ Global
 		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
-		Description = 
+		Description = The utility for dynamic change process affinity and priority
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9D28205B-3A64-4DEE-9FD7-3BA089C64100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
+        "MsmKey" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
+        "OwnerKey" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -33,7 +33,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\FahSmpAffinityChangerSetup_x64.msi"
+        "OutputFilename" = "8:Debug\\AffinityChangerSetup_x64.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -84,6 +84,11 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.2.0"
+                    {
+                    "Name" = "8:.NET Framework 2.0 (x86)"
+                    "ProductCode" = "8:Microsoft.Net.Framework.2.0"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
                     "Name" = "8:Windows Installer 3.1"
@@ -97,59 +102,59 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_52D7C464928446CBB4412A162594678C"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_0DFE6F5A4F4B4D7F97A8F350AF100521"
             {
-            "Name" = "8:Primary output from FahSmpAffinityChanger (Release x64)"
+            "Name" = "8:Primary output from AffinityChanger (Release x64)"
             "Condition" = "8:"
-            "Object" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
-            "FileType" = "3:2"
-            "InstallAction" = "3:1"
-            "Arguments" = "8:"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_F6F85857_A19E_47AC_8CB2_BE8F3868331A"
-            "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_8C7E224DA5294C9C95FB6555E696B4C0"
-            {
-            "Name" = "8:Primary output from FahSmpAffinityChanger (Release x64)"
-            "Condition" = "8:"
-            "Object" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
+            "Object" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
             "FileType" = "3:2"
             "InstallAction" = "3:4"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_2867FA29_74DC_45A6_A384_7DC957BC03B5"
+            "Identifier" = "8:_AF8ADE3F_773E_477C_BA88_FDC3188FB542"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_BFF24176EC234E07BBB4F6A4F2A915C7"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_39C1588C0ECF48F6B6CF96E1842AE0BD"
             {
-            "Name" = "8:Primary output from FahSmpAffinityChanger (Release x64)"
+            "Name" = "8:Primary output from AffinityChanger (Release x64)"
             "Condition" = "8:"
-            "Object" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
+            "Object" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
             "FileType" = "3:2"
-            "InstallAction" = "3:3"
+            "InstallAction" = "3:1"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_30EAD265_0778_4A0F_B06F_1C7997127AC8"
+            "Identifier" = "8:_5B16FFCC_F3EE_48CE_AD5D_4D3EB37E0687"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C85C016C745943C284BC1734B4DB245C"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_A93E34E62F254B478A45AE2A551818D9"
             {
-            "Name" = "8:Primary output from FahSmpAffinityChanger (Release x64)"
+            "Name" = "8:Primary output from AffinityChanger (Release x64)"
             "Condition" = "8:"
-            "Object" = "8:_3A5DEC288CEE427AA6D12B99C223A2E6"
+            "Object" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
             "FileType" = "3:2"
             "InstallAction" = "3:2"
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_1C5AD003_E96D_497C_9D47_0E8DD423947E"
+            "Identifier" = "8:_4C146919_2FCB_4568_92BE_41B83F25C4FC"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_BC665121D3FD46EB8C66A1EE24ED33CF"
+            {
+            "Name" = "8:Primary output from AffinityChanger (Release x64)"
+            "Condition" = "8:"
+            "Object" = "8:_710BC3CCCAFE4E17AD718AE83A7F84E2"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C2DE5873_97DD_47A2_B758_73833D86D63A"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
@@ -210,22 +215,22 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Affinity Changer"
-        "ProductCode" = "8:{112725DF-7782-4685-8EC5-B8ABE7BE1AF5}"
-        "PackageCode" = "8:{BB843803-D62F-44BB-8BB9-6E8A516D3099}"
+        "ProductCode" = "8:{F40EBEB2-22A4-4401-9DA9-AE8FA4DB6513}"
+        "PackageCode" = "8:{7B1BDC3F-E7AF-4CFE-B5E7-7EFF5E07F12A}"
         "UpgradeCode" = "8:{4C711862-1730-4BD1-B4E0-BAC4B1970378}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:nick4eva's software"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:http://nick4eva.googlepages.com/affinity_changer"
+        "ARPHELPLINK" = "8:http://nick4eva.googlepages.com/affinitychanger"
         "Title" = "8:Affinity Changer"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Mykola Shestopal"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:The utility for dynamic change process affinity and priority"
         "ARPURLINFOABOUT" = "8:http://nick4eva.googlepages.com"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
@@ -729,7 +734,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3A5DEC288CEE427AA6D12B99C223A2E6"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_710BC3CCCAFE4E17AD718AE83A7F84E2"
             {
             "SourcePath" = "8:..\\AffinityChanger\\obj\\x64\\Release\\AffinityChanger.exe"
             "TargetName" = "8:"
@@ -757,7 +762,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B895BAF566CA442180D42BE5B402D9DF"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EF96F86F5B2A48D68F63E6FC7ABBB51F"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"
