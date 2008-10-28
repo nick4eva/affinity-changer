@@ -49,7 +49,7 @@ namespace AffinityChanger
             // 
             // serviceInstaller
             // 
-            this.serviceInstaller.Description = "The utility for dynamic change process affinity and priority.";
+            this.serviceInstaller.Description = "The utility for dynamic change process affinity and priority";
             this.serviceInstaller.DisplayName = "Affinity Changer";
             this.serviceInstaller.ServiceName = "AffinityChanger";
             this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
