@@ -220,14 +220,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Affinity Changer"
-        "ProductCode" = "8:{ECD35B58-5305-4C91-BF21-82191CEAF9B1}"
-        "PackageCode" = "8:{00951F68-F6E1-4177-BD87-6AA8E6310190}"
+        "ProductCode" = "8:{2419C3A8-3F6F-49C7-84E1-4DA3DC9CC9AD}"
+        "PackageCode" = "8:{A0BC236C-BCC4-4FC8-BD01-D7C15D7D3816}"
         "UpgradeCode" = "8:{9F6FDF18-B39F-454C-8424-5816A6309EA2}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:nick4eva's software"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://nick4eva.googlepages.com/affinitychanger"
@@ -282,30 +282,6 @@
                                         }
                                         "Values"
                                         {
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_519ECE5662DA4D6CA29283DCF6D04930"
-                                            {
-                                            "Name" = "8:ConfigurationFile"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_D2091FB5C40B430DB9667B2E273C56C2"
-                                            {
-                                            "Name" = "8:CheckInterval"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:3"
-                                            "Value" = "3:300000"
-                                            }
-                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_F7B45B9D95F4448C9AAAA4094C2211D1"
-                                            {
-                                            "Name" = "8:ProcessPriority"
-                                            "Condition" = "8:"
-                                            "Transitive" = "11:FALSE"
-                                            "ValueTypes" = "3:1"
-                                            "Value" = "8:normal"
-                                            }
                                         }
                                     }
                                 }
@@ -807,7 +783,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FFF4F80EE4444211926AA11262CE2BA7"
             {
-            "SourcePath" = "8:..\\AffinityChanger\\obj\\Release\\AffinityChanger.exe"
+            "SourcePath" = "8:..\\AffinityChanger\\obj\\Debug\\AffinityChanger.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_94AF5F45B41143D5898FE90AE37BD298"

@@ -215,14 +215,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Affinity Changer"
-        "ProductCode" = "8:{F40EBEB2-22A4-4401-9DA9-AE8FA4DB6513}"
-        "PackageCode" = "8:{7B1BDC3F-E7AF-4CFE-B5E7-7EFF5E07F12A}"
+        "ProductCode" = "8:{DCEC27CC-854A-43CE-8F75-929FD0697070}"
+        "PackageCode" = "8:{AED9AE58-C66B-46C3-8C73-7405127B0A65}"
         "UpgradeCode" = "8:{4C711862-1730-4BD1-B4E0-BAC4B1970378}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:nick4eva's software"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://nick4eva.googlepages.com/affinitychanger"
@@ -261,10 +261,24 @@
                             "Name" = "8:[Manufacturer]"
                             "Condition" = "8:"
                             "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:TRUE"
+                            "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D953CAEE68234162AE65B0F82BB03CB7"
+                                    {
+                                    "Name" = "8:Affinity Changer"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:TRUE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
