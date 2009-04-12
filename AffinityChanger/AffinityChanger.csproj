@@ -120,7 +120,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="AffinityChanger.pfx" />
-    <None Include="app.config" />
     <None Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>

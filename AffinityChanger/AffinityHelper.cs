@@ -6,115 +6,78 @@
 
 namespace AffinityChanger
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+	using System;
 
-    /// <summary>
-    /// Вспомогательный класс
-    /// </summary>
-    static class AffinityHelper
-    {
-        #region Поля
+	/// <summary>
+	/// Вспомогательный класс
+	/// </summary>
+	static class AffinityHelper
+	{
+		#region Поля
 
-        /// <summary>
-        /// Количество процессоров
-        /// </summary>
-        private static int cpuCount = Environment.ProcessorCount;
+		/// <summary>
+		/// Количество процессоров
+		/// </summary>
+		private static int cpuCount = Environment.ProcessorCount;
 
-        #endregion
+		#endregion
 
-        #region Свойства
+		#region Свойства
 
-        #region Количество процессоров
-        /// <summary>
-        /// Количество процессоров
-        /// </summary>
-        public static int CpuCount
-        {
-            get
-            {
-                return cpuCount;
-            }
-        } 
-        #endregion
+		#region Количество процессоров
 
-        #endregion
+		/// <summary>
+		/// Количество процессоров
+		/// </summary>
+		public static int CpuCount
+		{
+			get
+			{
+				return cpuCount;
+			}
+		}
 
-        #region Методы
+		#endregion
 
-        #region Установка маски соответствия процессоров для процесса
-        /// <summary>
-        /// Установка маски соответствия процессоров для процесса
-        /// </summary>
-        /// <param name="process">процесс</param>
-        /// <param name="cpuNumber">процессор</param>
-        public static void SetAffinity(Process process, int cpuNumber)
-        {
-            IntPtr affinityMask;
+		#endregion
 
-            // если маска соответствия процессоров для текущего процесса не соответствует текущему процессу
-            if (process.ProcessorAffinity != (affinityMask = (IntPtr)(Math.Pow(2, cpuNumber))))
-            {
-                // выставляем соответствующую маску соответствия процессоров для текущего процесса
-                process.ProcessorAffinity = affinityMask;
-            }
-        }
-        #endregion
+		#region Методы
 
-        #region Получение маски привязки процессов по-умолчанию
-        /// <summary>
-        /// Получение маски привязки процессов по-умолчанию
-        /// </summary>
-        /// <returns>маска привязки</returns>
-        public static IntPtr GetDefaultAffinity()
-        {
-            int bitmask = 0;
+		#region Получение маски привязки процессов по-умолчанию
 
-            for (int i = 0; i < AffinityHelper.CpuCount; i++)
-            {
-                bitmask += (int)Math.Pow(2, i);
-            }
+		/// <summary>
+		/// Получение маски привязки процессов по-умолчанию
+		/// </summary>
+		/// <returns>маска привязки</returns>
+		public static IntPtr GetDefaultAffinity()
+		{
+			int bitmask = 0;
 
-            return (IntPtr)bitmask;
-        } 
-        #endregion
+			for (int i = 0; i < AffinityHelper.CpuCount; i++)
+			{
+				bitmask += (int)Math.Pow(2, i);
+			}
 
-        #region Нахождение минимального числа в списке
-        /// <summary>
-        /// Нахождение минимального числа в списке
-        /// </summary>
-        /// <param name="list">список чисед</param>
-        /// <returns>минимальное число</returns>
-        public static int Min(List<int> list)
-        {
-            int value = 0;
-            bool hasValue = false;
-            foreach (int x in list)
-            {
-                if (hasValue)
-                {
-                    if (x < value)
-                    {
-                        value = x;
-                    }
-                }
-                else
-                {
-                    value = x;
-                    hasValue = true;
-                }
-            }
+			return (IntPtr)bitmask;
+		}
 
-            if (hasValue)
-            {
-                return value;
-            }
+		#endregion
 
-            throw new NotSupportedException();
-        } 
-        #endregion
+		#region Получение маски привязки для определенного ядра процессора
 
-        #endregion
-    }
+		/// <summary>
+		/// Получение маски привязки для определенного ядра процессора
+		/// </summary>
+		/// <param name="coreNumber">номер ядра процессора</param>
+		/// <returns>маска привязки</returns>
+		public static IntPtr GetAffinityForOneCore(int coreNumber)
+		{
+			// возвращаем маску привязки для определенного ядра процессора
+			return (IntPtr)Math.Pow(2, coreNumber);
+		}
+
+		#endregion
+
+		#endregion
+	}
 }
