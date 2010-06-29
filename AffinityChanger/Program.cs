@@ -18,9 +18,8 @@ namespace AffinityChanger
 		/// </summary>
 		private static void Main()
 		{
-			ServiceBase[] servicesToRun;
-			servicesToRun = new ServiceBase[] { new AffinityChangerService() };
-			ServiceBase.Run(servicesToRun);
+		    var servicesToRun = new ServiceBase[] { new AffinityChangerService() };
+		    ServiceBase.Run(servicesToRun);
 		}
 	}
 }

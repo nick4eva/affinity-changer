@@ -23,7 +23,7 @@ namespace AffinityChanger
 		/// <summary>
 		/// Путь к конфигурационному файлу
 		/// </summary>
-		private string configFilePath;
+		private string _configFilePath;
 
 		#endregion
 
@@ -36,7 +36,7 @@ namespace AffinityChanger
 		/// </summary>
 		public AffinityChangerService()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 
 		#endregion
@@ -66,7 +66,7 @@ namespace AffinityChanger
 		/// <param name="enumType">тип перечисления</param>
 		/// <param name="value">значение экземпляра перечисления</param>
 		/// <returns>флаг, указывающий входит данная строка в перечисление или нет</returns>
-		public bool IsDefined(Type enumType, string value)
+		private static bool IsDefined(Type enumType, string value)
 		{
 			string[] enumNames = Enum.GetNames(enumType);
 
@@ -90,9 +90,9 @@ namespace AffinityChanger
 		private void SetTimerInterval()
 		{
 			// задаем значения для ключа реестра
-			double defaultValue = 300000;
-			string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
-			string valueName = "CheckInterval";
+			const double defaultValue = 300000;
+			const string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
+			const string valueName = "CheckInterval";
 
 			// если нет ветки в реестре
 			if (Registry.GetValue(keyName, valueName, defaultValue) == null)
@@ -109,7 +109,7 @@ namespace AffinityChanger
 			}
 
 			// выставляем интервал таймера из реестра
-			this.timer.Interval = (int)Registry.GetValue(keyName, valueName, defaultValue);
+			timer.Interval = (int)Registry.GetValue(keyName, valueName, defaultValue);
 		}
 
 		#endregion
@@ -123,8 +123,8 @@ namespace AffinityChanger
 		{
 			// задаем значения для ключа реестра
 			string defaultValue = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
-			string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
-			string valueName = "ConfigurationFile";
+			const string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\nick4eva's software\Affinity Changer";
+			const string valueName = "ConfigurationFile";
 
 			// если нет ветки в реестре
 			if (Registry.GetValue(keyName, valueName, defaultValue) == null)
@@ -141,7 +141,7 @@ namespace AffinityChanger
 			}
 
 			// получаем путь к конфигурационному файлу из реестра
-			this.configFilePath = ((string)Registry.GetValue(keyName, valueName, defaultValue)).Replace("\"", string.Empty);
+			_configFilePath = ((string)Registry.GetValue(keyName, valueName, defaultValue)).Replace("\"", string.Empty);
 		}
 
 		#endregion
@@ -154,16 +154,16 @@ namespace AffinityChanger
 		private void SetAffinity()
 		{
 			// если нет конфигурационного файла, то ничего не делаем
-			if (!File.Exists(this.configFilePath))
+			if (!File.Exists(_configFilePath))
 			{
 				return;
 			}
 
 			// считываем конфигурационный файл в набор строк (каждая строка - конфигурация для процесса)
-			List<string> configItems;
+			var configItems = new List<string>();
 			try
 			{
-				configItems = new List<string>(File.ReadAllLines(this.configFilePath));
+				configItems.AddRange(File.ReadAllLines(_configFilePath));
 			}
 			catch (IOException)
 			{
@@ -171,35 +171,40 @@ namespace AffinityChanger
 			}
 
 			// если конфигурационный файл пустой, то ничего не делаем
-			if (configItems == null || configItems.Count == 0)
+			if (configItems.Count == 0)
 			{
 				return;
 			}
 
 			// получаем список процессов в системе
-			List<Process> processList = new List<Process>(Process.GetProcesses());
+			var processList = new List<Process>(Process.GetProcesses());
+
 			// сортируем список по имени процесса
 			processList.Sort(CompareProcessesByName);
-			// создаем словарь, в котором будет храниться процесс и его желаемый приоритет
-			Dictionary<Process, ProcessPriorityClass> processNameDictionaryWithPriority = new Dictionary<Process, ProcessPriorityClass>();
-			// временная переменная для приоритета процесса
-			ProcessPriorityClass priority;
 
-			// перебираем все строки из конфигурационного файла
+			// создаем словарь, в котором будет храниться процесс и его желаемый приоритет
+			var processNameDictionaryWithPriority = new Dictionary<Process, ProcessPriorityClass>();
+
+		    // перебираем все строки из конфигурационного файла
 			foreach (string item in configItems)
 			{
 				// разделяем строку на параметры (разделитель параметров - запятая, первый параметр имя процесса, второй - приоритет)
-				string[] itemParams = item.Split(new char[] { ',' });
-				// находим все процессы, у которых в имени присутствует строка из конфигурационного файла (первый параметр)
+				string[] itemParams = item.Split(new [] { ',' });
+				
+                // находим все процессы, у которых в имени присутствует строка из конфигурационного файла (первый параметр)
 				List<Process> procList = processList.FindAll(x => Regex.IsMatch(x.ProcessName, itemParams[0].Trim()));
-				// перебираем все найденные процессы
+				
+                // перебираем все найденные процессы
 				foreach (var process in procList)
 				{
-					// если указан приоритет для процесса(ов), и это правильный приоритет
-					if ((itemParams.Length > 1) && IsDefined(typeof(ProcessPriorityClass), itemParams[1].Trim()))
+                    // временная переменная для приоритета процесса
+                    ProcessPriorityClass priority;
+                    
+                    // если указан приоритет для процесса(ов), и это правильный приоритет
+				    if ((itemParams.Length > 1) && IsDefined(typeof(ProcessPriorityClass), itemParams[1].Trim()))
 					{
 						// парсим значение приоритета
-						priority = (ProcessPriorityClass)System.Enum.Parse(typeof(ProcessPriorityClass), itemParams[1].Trim(), true);
+						priority = (ProcessPriorityClass)Enum.Parse(typeof(ProcessPriorityClass), itemParams[1].Trim(), true);
 					}
 					else
 					{
@@ -213,26 +218,20 @@ namespace AffinityChanger
 			}
 
 			// получаем список процессов которые нужно привязывать к процессорам из словаря
-			List<Process> processesList = new List<Process>(processNameDictionaryWithPriority.Keys);
-			foreach (KeyValuePair<Process, ProcessPriorityClass> kvp in processNameDictionaryWithPriority)
-			{
-				// получаем номер процессора, к которому нужно привязывать процесс
-				int coreNumber = processesList.FindIndex(x => x.Id == kvp.Key.Id) % AffinityHelper.CpuCount;
+			var processesList = new List<Process>(processNameDictionaryWithPriority.Keys);
+            foreach (KeyValuePair<Process, ProcessPriorityClass> kvp in processNameDictionaryWithPriority)
+            {
+                KeyValuePair<Process, ProcessPriorityClass> kvp1 = kvp;
 
-				// если привязка процесса не совпадает с необходимой привязкой
-				if (kvp.Key.ProcessorAffinity != AffinityHelper.GetAffinityForOneCore(coreNumber))
-				{
-					// устанавливаем процессу необходимую привязку
-					kvp.Key.ProcessorAffinity = AffinityHelper.GetAffinityForOneCore(coreNumber);
-				}
-				
-				// если приоритет процесса не совпадает с необходимым приоритетом
-				if (kvp.Key.PriorityClass != kvp.Value)
-				{
-					// устанавливаем процессу необходимый приоритет
-					kvp.Key.PriorityClass = kvp.Value;
-				}
-			}
+                // получаем номер процессора, к которому нужно привязывать процесс
+                int coreNumber = processesList.FindIndex(x => x.Id == kvp1.Key.Id) % AffinityHelper.CpuCount;
+
+                // устанавливаем процессу необходимую привязку
+                kvp.Key.ProcessorAffinity = AffinityHelper.GetAffinityForOneCore(coreNumber);
+
+                // устанавливаем процессу необходимый приоритет
+                kvp.Key.PriorityClass = kvp.Value;
+            }
 		}
 		#endregion
 
@@ -245,16 +244,16 @@ namespace AffinityChanger
 		protected override void OnStart(string[] args)
 		{
 			// устанавливаем интервал таймера
-			this.SetTimerInterval();
+			SetTimerInterval();
 
 			// устанавливаем путь к конфигурационному файлу
-			this.SetConfigFile();
+			SetConfigFile();
 
 			// устанавливаем привязку процессов к процессорам
-			this.SetAffinity();
+			SetAffinity();
 
 			// запускаем таймер
-			this.timer.Start();
+			timer.Start();
 		}
 
 		#endregion
@@ -267,7 +266,7 @@ namespace AffinityChanger
 		protected override void OnStop()
 		{
 			// останавливаем таймер
-			this.timer.Stop();
+			timer.Stop();
 		}
 
 		#endregion
@@ -282,13 +281,13 @@ namespace AffinityChanger
 		private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			// устанавливаем интервал таймера
-			this.SetTimerInterval();
+			SetTimerInterval();
 
 			// устанавливаем конфигурационный файл
-			this.SetConfigFile();
+			SetConfigFile();
 
 			// устанавливаем привязку процессов к процессорам
-			this.SetAffinity();
+			SetAffinity();
 		}
 
 		#endregion
