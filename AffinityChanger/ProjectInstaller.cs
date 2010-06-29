@@ -1,6 +1,5 @@
 namespace AffinityChanger
 {
-	using System;
 	using System.ComponentModel;
 	using System.Configuration.Install;
 
@@ -12,7 +11,7 @@ namespace AffinityChanger
 		/// </summary>
 		public ProjectInstaller()
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace AffinityChanger
 		/// <summary>
 		/// Количество процессоров
 		/// </summary>
-		private static int cpuCount = Environment.ProcessorCount;
+		public static readonly int CpuCount = Environment.ProcessorCount;
 
 		#endregion
 
@@ -26,16 +26,16 @@ namespace AffinityChanger
 
 		#region Количество процессоров
 
-		/// <summary>
-		/// Количество процессоров
-		/// </summary>
-		public static int CpuCount
-		{
-			get
-			{
-				return cpuCount;
-			}
-		}
+        ///// <summary>
+        ///// Количество процессоров
+        ///// </summary>
+        //public static int CpuCount
+        //{
+        //    get
+        //    {
+        //        return cpuCount;
+        //    }
+        //}
 
 		#endregion
 
@@ -53,7 +53,7 @@ namespace AffinityChanger
 		{
 			int bitmask = 0;
 
-			for (int i = 0; i < AffinityHelper.CpuCount; i++)
+			for (int i = 0; i < CpuCount; i++)
 			{
 				bitmask += (int)Math.Pow(2, i);
 			}
