@@ -22,25 +22,6 @@ namespace AffinityChanger
 
 		#endregion
 
-		#region Свойства
-
-		#region Количество процессоров
-
-        ///// <summary>
-        ///// Количество процессоров
-        ///// </summary>
-        //public static int CpuCount
-        //{
-        //    get
-        //    {
-        //        return cpuCount;
-        //    }
-        //}
-
-		#endregion
-
-		#endregion
-
 		#region Методы
 
 		#region Получение маски привязки процессов по-умолчанию
